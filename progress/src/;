@@ -1,0 +1,117 @@
+<template>
+
+  <v-layout>
+    <v-card class = 'pa-2'>
+      <v-card-title class='display-1'>Custom Loss Metric</v-card-title>
+      <v-divider></v-divider>
+      <svg id='graph' ref='parent' width='650' height='500'></svg>
+    </v-card>
+  </v-layout>
+
+</template>
+
+
+<script>
+
+  // import Component from '../componentLocation'
+
+  export default {
+
+  name: 'Graphs',
+
+  	components: { },
+
+  	props: [ ],
+
+  	data() {
+  	  return {
+  	  	// data!
+  	  }
+  	},
+
+  	watch: {
+
+  	},
+
+  	methods: {
+
+  	},
+
+  	computed: {
+
+  	},
+
+  	mounted() {
+
+  	  let bounding = this.$refs.parent.getBoundingClientRect()
+
+  	  let margin = 50;
+  	  let width = 650 - 2 * margin
+  	  let height = 500 - margin
+
+  	  let rect = d3.select('svg').append('rect')
+  	    .attr('x', margin - 10)
+  	    .attr('y', margin - 10)
+  	    .attr('width', width - 10)
+  	    .attr('height', height - 50)
+  	    .style('fill', '#edf4f8')
+
+      let svg = d3.select('svg').append('g')
+      //  .style('fill', '#edf4f8')
+
+      let data = [4, 2, 6, 7, 4, 5, 6, 8, 10, 4, 7, 6, 8, 6, 4, 5, 3, 0]
+
+      let x = d3.scaleLinear()
+        .domain([0, data.length - 1])
+        .range([margin, width]);
+
+      let y = d3.scaleLinear()
+        .domain(d3.extent(data))
+        .range([height - margin, margin]);
+
+      let yAxis = d3.axisLeft(y).ticks(5)
+
+      let line = d3.line()
+        .curve(d3.curveMonotoneX)
+        .x((d, i) => x(i))
+        .y((d) => y(d));
+
+      svg.append('path')
+        .attr('class', 'line')
+        .attr('d', line(data))
+        .attr('fill', 'none')
+        .attr('stroke', '#607e8a')
+        .attr('stroke-width', 3)
+
+      // Add the X Axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    // Add the Y Axis
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr('transform', 'translate(' + (margin - 15) + ',0)')
+        .call(yAxis);
+
+      svg.selectAll('.dot').data(data)
+        .enter().append('circle')
+        .attr('class', 'dot')
+        .attr('cx', (d, i) => x(i))
+        .attr('cy', (d) => y(d))
+        .attr('r', 5)
+
+
+
+  	}
+
+  }
+
+</script>
+
+
+<style>
+
+
+</style>
