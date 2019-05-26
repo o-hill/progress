@@ -10,7 +10,7 @@
     <v-content>
       <Progress/>
     </v-content>
-    <v-footer class='blue-grey'>
+    <v-footer class='blue-grey' fixed>
       <!-- <v-spacer></v-spacer> -->
       <div class='ml-4'>&copy; Michigan Aerospace Corporation {{ new Date().getFullYear() }}</div>
     </v-footer>

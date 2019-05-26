@@ -10,7 +10,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 
-    networks: [ ]
+    networks: [ ],
+    selectedNetwork: { }
 
   },
   mutations: {
@@ -20,21 +21,18 @@ export default new Vuex.Store({
     },
 
     updateNetwork(state, data) {
-      // state.networks = state.networks.map((elt, idx) => {
-      //   if (idx !== index) { return elt; }
-      //   return data
-      // })
-      //
-
-      console.log(data.name)
-
       state.networks = [
         ...state.networks.filter(elt => elt.name !== data.name),
         data
       ]
+    },
+
+    setSelectedNetwork(state, data) {
+      state.selectedNetwork = data
     }
 
   },
+
   actions: {
 
     list_networks(context) {
@@ -56,6 +54,28 @@ export default new Vuex.Store({
 
       api.post_mutation(setPlots, data).then((response) => {
         context.commit('updateNetwork', response.data.data.updateNetwork)
+      })
+    },
+
+    selectNetwork(context, data) {
+
+      let query = gql`
+        query networks ($name: String!) {
+          networks (names: [$name]) {
+            name
+            nPlots
+            plotNames
+            plotData {
+              title
+              name
+              data
+            }
+          }
+        }`
+
+      api.get(query, data).then((response) => {
+        console.log(response)
+        context.commit('setSelectedNetwork', response.data.data.networks[0])
       })
     }
 
