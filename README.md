@@ -5,13 +5,13 @@ Basically tensorboard but it works better for us.
 ## Set up
 1. Clone the repository somewhere.
 2. Figure out somewhere to put your progress files:
-  * Create a directory (mine is `~/.network_progress`)
-  * Edit the appropriate lines in both `training_progress.py` and `schema.py` to reference the correct location.
+   * Create a directory (mine is `~/.network_progress`)
+   * Edit the appropriate lines in both `training_progress.py` and `schema.py` to reference the correct location.
 3. Put `training_progress.py` somewhere you can import it from (`~/local-python/` etc.).
 4. Go to `progress/progress` and run `npm install`.
 5. The servers should both be ready at this point, so start them:
-  * `python server.py` from `progress/server/`.
-  * `npm run serve` from `progress/progress/`.
+   * `python server.py` from `progress/server/`.
+   * `npm run serve` from `progress/progress/`.
 6. Put some CSV files in your progress files directory.
 7. Head to `localhost:8080` and watch the training progress!
 
