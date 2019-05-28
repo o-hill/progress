@@ -35,6 +35,9 @@ losses = network.train(X, y)
 writer.write(losses) # losses should be a numpy array here.
 ```
 
+The `losses` array needs to be the same size as the `cols` list provided above - that is, you need to provide
+a measure for each loss at each iteration of training.
+
 You can also query the writer for the average loss over the last ten iterations:
 
 ```python
