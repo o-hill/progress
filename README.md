@@ -19,13 +19,13 @@ Basically tensorboard but it works better for us.
 ## Progress Writer
 `training_progress.py` implements a `Writer` class that follows your ML model and writes data to a CSV file 
 in a separate thread while the model is training. A `Writer` object is instantiated with a
-name (`Example_Network`), and a list of column names that it should expect (`MSE`, `Wasserstein Loss`, `Dice-Sorenson`, etc.):
+name (`Example_Network`), and a list of column names that it should expect (`MSE`, `Wasserstein Loss`, `Sorenson-Dice`, etc.):
 
 ```python
 from training_progress import Writer
 ...
 # Add as many losses to the list as you want.
-writer = Writer('Example_Network', cols=['Mean Squared Error', 'Wasserstein Loss', 'Dice-Sorenson'])
+writer = Writer('Example_Network', cols=['Mean Squared Error', 'Wasserstein Loss', 'Sorenson-Dice'])
 ```
 
 In your training loop, extract the loss at each iteration, and write the array to a csv file like so:
