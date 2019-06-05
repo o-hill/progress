@@ -32,8 +32,6 @@
 
 <script>
 
-  // import Component from '../componentLocation'
-
   export default {
 
   name: 'Graphs',
@@ -93,7 +91,6 @@
         let svg = d3.select('#graph_' + this.name).append('g')
           .attr('id', 'svg_group_' + this.name)
 
-        //let data = [4, 2, 6, 7, 4, 5, 6, 8, 10, 4, 7, 6, 8, 6, 4, 5, 3, 0, 14]
         let data = this.values
 
         let x = d3.scaleLinear()
@@ -202,8 +199,6 @@
   	},
 
   	mounted() {
-
-      console.log('mounted')
       this.resizeGraph(true)
   	}
 
