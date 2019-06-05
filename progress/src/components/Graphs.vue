@@ -3,24 +3,24 @@
   <v-layout justify-center>
     <v-container class='pa-0 ma-3' fluid>
       <v-card class='' ref='card'>
-        <v-card-title class='display-1'>{{ this.title }}</v-card-title>
+        <v-card-title class='blue-grey display-1 white--text'>{{ this.title }}</v-card-title>
         <v-divider></v-divider>
         <svg width='100%' :id='"graph_" + this.name' ref='parent' height='500'></svg>
         <v-divider></v-divider>
-        <v-layout>
+        <v-layout class='blue-grey'>
           <v-flex xs4 class='pl-4'>
-            <v-card-title>Iteration: {{ this.currentIteration }}</v-card-title>
-            <v-card-title>Loss: {{ this.currentLoss }}</v-card-title>
+            <v-card-title class='white--text'>Iteration: {{ this.currentIteration }}</v-card-title>
+            <v-card-title class='white--text'>Loss: {{ this.currentLoss }}</v-card-title>
           </v-flex>
           <v-flex xs4>
-            <v-card-title>Most Recent Iteration Loss: {{ this.values.slice(-1)[0] }}</v-card-title>
-            <v-card-title>
+            <v-card-title class='white--text'>Most Recent Iteration Loss: {{ this.values.slice(-1)[0] }}</v-card-title>
+            <v-card-title class='white--text'>
               Mean Loss: {{ this.values.reduce((a, b) => a + b) / this.values.length }}
             </v-card-title>
           </v-flex>
           <v-flex xs4>
-            <v-card-title>Maximum Loss: {{ Math.max(...this.values) }}</v-card-title>
-            <v-card-title>Minimum Loss: {{ Math.min(...this.values) }}</v-card-title>
+            <v-card-title class='white--text'>Maximum Loss: {{ Math.max(...this.values) }}</v-card-title>
+            <v-card-title class='white--text'>Minimum Loss: {{ Math.min(...this.values) }}</v-card-title>
           </v-flex>
         </v-layout>
       </v-card>
@@ -169,6 +169,7 @@
             .attr('cx', (d, i) => x(iteration))
             .attr('cy', (d) => y(d))
             .attr('r', 5)
+            .style('fill', '#ff4500')
 
           that.currentIteration = iteration
           that.currentLoss = data[iteration]

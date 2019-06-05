@@ -11,25 +11,19 @@ export default new Vuex.Store({
   state: {
 
     networks: [ ],
-    selectedNetwork: { }
+    network: { }
 
   },
   mutations: {
 
-    set_network_list(state, data) {
-      state.networks = data.data['networks']
+    setResources(state, data) {
+      for (let resource in data.data) {
+        if (resource in state)
+          state[resource] = data.data[resource]
+        else
+          throw new Error('Resource not defined in state!')
+      }
     },
-
-    updateNetwork(state, data) {
-      state.networks = [
-        ...state.networks.filter(elt => elt.name !== data.name),
-        data
-      ]
-    },
-
-    setSelectedNetwork(state, data) {
-      state.selectedNetwork = data
-    }
 
   },
 
@@ -37,7 +31,7 @@ export default new Vuex.Store({
 
     list_networks(context) {
       api.get_networks().then((response) => {
-        context.commit('set_network_list', response.data)
+        context.commit('setResources', response.data)
       })
     },
 
@@ -53,7 +47,7 @@ export default new Vuex.Store({
       }`
 
       api.post_mutation(setPlots, data).then((response) => {
-        context.commit('updateNetwork', response.data.data.updateNetwork)
+        context.commit('setResources', response.data)
       })
     },
 
@@ -61,7 +55,7 @@ export default new Vuex.Store({
 
       let query = gql`
         query networks ($name: String!) {
-          networks (names: [$name]) {
+          network (name: $name) {
             name
             nPlots
             plotNames
@@ -75,7 +69,7 @@ export default new Vuex.Store({
 
       api.get(query, data).then((response) => {
         console.log(response)
-        context.commit('setSelectedNetwork', response.data.data.networks[0])
+        context.commit('setResources', response.data)
       })
     }
 

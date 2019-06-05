@@ -20,6 +20,7 @@ export default {
       query: `{
         networks {
           name
+          title
           nPlots
         }
       }`

@@ -7,7 +7,7 @@
           <template v-for='(network, index) in networks'>
             <v-list-tile @click='selectNetwork(index)' class='' :key=index>
               <v-list-tile-content>
-                <v-list-tile-title>{{ network.name }}</v-list-tile-title>
+                <v-list-tile-title>{{ network.title }}</v-list-tile-title>
                 <v-list-tile-sub-title>{{ network.nPlots }} plots available.</v-list-tile-sub-title>
               </v-list-tile-content>
               <!-- <v-list-tile-action> -->
@@ -92,7 +92,7 @@
   	  selectedNetwork() {
   	    console.log('computed')
   	    window.resizingFuncs = [ ]
-  	    return this.$store.state.selectedNetwork
+  	    return this.$store.state.network
   	  }
 
   	},
