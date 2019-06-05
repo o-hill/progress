@@ -8,28 +8,9 @@ const BASE_URL = 'http://localhost:5000/graphql'
 
 export default {
 
-  get(apiquery, data) {
+  call(apiquery, data=null) {
     return axios.post(BASE_URL, {
       query: print(apiquery),
-      variables: data
-    })
-  },
-
-  get_networks() {
-    return axios.post(BASE_URL, {
-      query: `{
-        networks {
-          name
-          title
-          nPlots
-        }
-      }`
-    })
-  },
-
-  post_mutation(mut, data) {
-    return axios.post(BASE_URL, {
-      query: print(mut),
       variables: data
     })
   }

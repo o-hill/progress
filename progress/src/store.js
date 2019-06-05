@@ -30,7 +30,16 @@ export default new Vuex.Store({
   actions: {
 
     list_networks(context) {
-      api.get_networks().then((response) => {
+      let query = gql`
+        query networks {
+          networks {
+            name
+            title
+            nPlots
+          }
+        }`
+
+      api.call(query).then((response) => {
         context.commit('setResources', response.data)
       })
     },
@@ -46,7 +55,7 @@ export default new Vuex.Store({
         }
       }`
 
-      api.post_mutation(setPlots, data).then((response) => {
+      api.call(setPlots, data).then((response) => {
         context.commit('setResources', response.data)
       })
     },
@@ -67,7 +76,7 @@ export default new Vuex.Store({
           }
         }`
 
-      api.get(query, data).then((response) => {
+      api.call(query, data).then((response) => {
         console.log(response)
         context.commit('setResources', response.data)
       })
