@@ -77,7 +77,6 @@ export default new Vuex.Store({
         }`
 
       api.call(query, data).then((response) => {
-        console.log(response)
         context.commit('setResources', response.data)
       })
     }
