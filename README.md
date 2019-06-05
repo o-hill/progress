@@ -19,7 +19,7 @@ Basically tensorboard but it works better for us.
 ## Progress Writer
 `training_progress.py` implements a `Writer` class that follows your ML model and writes data to a CSV file 
 in a separate thread while the model is training. A `Writer` object is instantiated with a
-name (`Example_Network`), and a list of column names that it should expect (`MSE`, `Wasserstein Loss`, `Sorenson-Dice`, etc.):
+name (`Example_Network`), and a list of column names that it should expect (`MSE`, `Wasserstein`, `Sorenson-Dice`, etc.):
 
 ```python
 from training_progress import Writer
